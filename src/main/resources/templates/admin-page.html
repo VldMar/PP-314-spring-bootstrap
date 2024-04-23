@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+
+    <link rel="stylesheet" th:href="@{/css/vendor/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <span ></span>
+        <span ></span>
+        <a class="nav-link logout" th:href="@{/logout}">Logout</a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none bg-light sidebar d-md-block">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="" class="nav-link active">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">User</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>Admin panel</h1>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#all-users" role="tab" aria-controls="home" aria-selected="true">All users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#new-user" role="tab" aria-controls="profile" aria-selected="false">New user</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tabContent">
+                    <div class="tab-pane fade show active" id="all-users" role="tabpanel" aria-labelledby="home-tab">...</div>
+                    <div class="tab-pane fade" id="new-user" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script th:src="@{/js/vendor/jquery.min.js}"></script>
+    <script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+</body>
+</html>
