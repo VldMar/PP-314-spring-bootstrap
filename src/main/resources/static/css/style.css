@@ -59,6 +59,15 @@ body {
     color: rgba(255,255,255,.9);
 }
 
+.navbar-info {
+    color: white;
+}
+
+#span-username {
+    font-weight: bold;
+}
+
+
 .sidebar-sticky {
     position: relative;
     top: 0;
