@@ -29,10 +29,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain setFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
-                            auth.requestMatchers("/admin", "/admin/**").hasRole("ADMIN");
-                            auth.requestMatchers("/user").hasRole("USER");
                             auth.requestMatchers("/login", "/login**").permitAll();
                             auth.requestMatchers("/css/**", "/js/**").permitAll();
+                            auth.requestMatchers("/user").hasRole("USER");
+                            auth.requestMatchers("/", "/**").hasRole("ADMIN");
                             auth.anyRequest().authenticated();
                         }
                 )

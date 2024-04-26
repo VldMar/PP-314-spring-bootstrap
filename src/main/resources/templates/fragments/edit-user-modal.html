@@ -1,0 +1,55 @@
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="edit-user-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center ">
+                <form th:action="@{/update}" th:method="put" th:object="${editableUser}"
+                      class="small-form font-weight-bold text-center">
+                    <div class="mb-3">
+                        <label for="edit-id">ID</label>
+                        <input id="edit-id" type="text" class="form-control" readonly th:field="*{id}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-first-name">First name</label>
+                        <input id="edit-first-name" type="text" class="form-control" th:field="*{name}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-last-name">Last name</label>
+                        <input id="edit-last-name" type="text"  class="form-control" th:field="*{lastName}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-age">Age</label>
+                        <input id="edit-age" type="text" class="form-control" th:field="*{age}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-email">Email</label>
+                        <input id="edit-email" type="text"  class="form-control" th:field="*{email}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-password">Password</label>
+                        <input id="edit-password" type="password" class="form-control" th:field="*{password}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-role">ROLE</label>
+                        <select id="edit-role" name="roles" class="custom-select" size="2" multiple>
+                            <option th:each="role : ${allRoles}"
+                                    th:value="${role.getName()}"
+                                    th:text="${role.toString()}"
+                                    th:selected="${#sets.contains(editableUser.roles, role)}"></option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>

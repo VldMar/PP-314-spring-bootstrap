@@ -1,0 +1,41 @@
+<div class="tab-pane fade" id="new-user" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-item">
+        <h2 class="tab-item__header">Add New User</h2>
+        <div class="tab-item__content d-flex flex-column align-items-center justify-content-center font-weight-bold text-center">
+            <form th:method="post" th:action="@{/add}" th:object="${newUser}"
+                  class="small-form">
+                <div class="mb-3">
+                    <label for="first-name">First name</label>
+                    <input id="first-name" type="text" class="form-control" placeholder="First Name" th:field="*{name}">
+                </div>
+                <div class="mb-3">
+                    <label for="last-name">Last name</label>
+                    <input id="last-name" type="text"  class="form-control" placeholder="Last Name" th:field="*{lastName}">
+                </div>
+                <div class="mb-3">
+                    <label for="age">Age</label>
+                    <input id="age" type="text" class="form-control" placeholder="Age" th:field="*{age}">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input id="email" type="text"  class="form-control" placeholder="Email" th:field="*{email}">
+                </div>
+                <div class="mb-3">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" class="form-control" placeholder="Password" th:field="*{password}">
+                </div>
+                <div class="mb-3">
+                    <label>ROLE</label>
+                    <select name="roles" class="custom-select" size="2" multiple>
+                        <option th:each="role : ${allRoles}"
+                                th:value="${role.getName()}"
+                                th:text="${role.toString()}"
+                                th:selected="${#sets.contains(newUser.roles, role)}"></option>
+                    </select>
+                </div>
+
+                <button id="btn-add-new-user" type="submit" class="btn btn-success btn-lg">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException("Пользователь с username=%s уже существует!".formatted(user.getUsername()));
         }
 
-        if(user.getRoles() == null) {
+        if (user.getRoles() == null) {
             user.setRoles(Set.of(new Role("ROLE_USER")));
         }
 

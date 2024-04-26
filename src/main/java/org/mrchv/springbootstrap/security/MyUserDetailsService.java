@@ -3,6 +3,8 @@ package org.mrchv.springbootstrap.security;
 import jakarta.annotation.PostConstruct;
 import org.mrchv.springbootstrap.model.Role;
 import org.mrchv.springbootstrap.model.User;
+import org.mrchv.springbootstrap.service.RoleService;
+import org.mrchv.springbootstrap.service.RoleServiceImpl;
 import org.mrchv.springbootstrap.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,20 +19,29 @@ import java.util.Set;
 public class MyUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
+    private final RoleService roleService;
 
-    public MyUserDetailsService(UserService userService) {
+    @Autowired
+    public MyUserDetailsService(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @PostConstruct
     public void init() {
+        Role adminRole = new Role("ROLE_ADMIN");
+        Role userRole = new Role("ROLE_USER");
+
+        roleService.saveRole(adminRole);
+        roleService.saveRole(userRole);
+
         User admin = User.builder()
                 .name("ivan")
                 .lastName("ivanov")
                 .age(5)
                 .email("admin@mail.ru")
                 .password("admin")
-                .roles(Set.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")))
+                .roles(Set.of(roleService.findRoleByName("ROLE_ADMIN"), roleService.findRoleByName("ROLE_USER")))
                 .build();
 
         userService.addUser(admin);
@@ -42,7 +53,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 .age(6)
                 .email("user@mail.ru")
                 .password("user")
-                .roles(Set.of(new Role("ROLE_USER")))
+                .roles(Set.of(roleService.findRoleByName("ROLE_USER")))
                 .build();
 
         userService.addUser(user);
