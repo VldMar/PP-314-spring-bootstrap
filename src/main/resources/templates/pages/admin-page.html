@@ -9,7 +9,6 @@
 
 </head>
 <body>
-    <!-- top navbar  -->
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap shadow">
         <div class="navbar-info">
             <span id="span-username" th:text="${principal.username}"></span>
@@ -29,10 +28,10 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="" class="nav-link active">Admin</a>
+                            <a th:href="@{/}" class="nav-link active">Admin</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">User</a>
+                            <a th:href="@{/user}" class="nav-link">User</a>
                         </li>
                     </ul>
                 </div>
@@ -61,12 +60,8 @@
         </div>
     </div>
 
-    <!-- Модальное окно update   -->
-    <div id="update-modal"></div>
-<!--    <th:block th:insert="fragments/edit-user-modal"></th:block>-->
-
-    <!-- Модальное окно delete   -->
-<!--    <th:block th:insert="fragments/delete-user-modal"></th:block>-->
+    <!-- Модальное окно   -->
+    <div id="modal-page"></div>
 
     <script th:src="@{/js/vendor/jquery.min.js}"></script>
     <script th:src="@{/js/vendor/bootstrap.min.js}"></script>

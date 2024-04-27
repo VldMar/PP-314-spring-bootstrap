@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                             auth.requestMatchers("/login", "/login**").permitAll();
                             auth.requestMatchers("/css/**", "/js/**").permitAll();
                             auth.requestMatchers("/user").hasRole("USER");
-                            auth.requestMatchers("/", "/**").hasRole("ADMIN");
+                            auth.requestMatchers("/").hasRole("ADMIN");
                             auth.anyRequest().authenticated();
                         }
                 )

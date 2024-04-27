@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User page</title>
+
+    <link rel="stylesheet" th:href="@{/css/vendor/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap shadow">
+        <div class="navbar-info">
+            <span id="span-username" th:text="${user.username}"></span>
+            <span>with roles:</span>
+            <span id="span-roles" th:each="role: ${user.getAuthorities()}" th:text="|${role} |"></span>
+        </div>
+        <form method="post" th:action="@{/logout}">
+            <button type="submit" class="nav-link logout">Logout</button>
+        </form>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!--  Left sidebar sticky-->
+            <nav class="col-md-2 d-none bg-light sidebar d-md-block main-panel">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item" th:if="${isAdmin}">
+                            <a th:href="@{/}" class="nav-link">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/user}" class="nav-link active">User</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!--  Центральная панель страницы  -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-panel">
+                <h1>User information-page</h1>
+
+                <div class="tab-content" id="tabContent">
+                    <th:block th:insert="fragments/about-user-table"></th:block>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

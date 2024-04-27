@@ -1,18 +1,30 @@
-$( document ).ready(function() {
+function showModal(data) {
+    $("#modal-page").html(data);
+    $("#modal-page .modal").modal("show");
+}
 
-});
+function closeModal() {
+    $("#modal-page").html("");
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+}
 
-function onEditClick(id) {
-    $.ajax({
+function onUpdateClick(id) {
+   $.ajax({
         type: "get",
         url: "/update/" + id,
         success: function (data) {
-            console.log("SUCCESS : ", data);
-            $("#update-modal").html(data);
-            $("#editModal").modal("show");
-        },
-        error: function (e) {
-            console.log("ERROR : ", e);
+            showModal(data);
+        }
+    });
+}
+
+function onDeleteClick(id) {
+    $.ajax({
+        type: "get",
+        url: "/delete/" + id,
+        success: function (data) {
+            showModal(data);
         }
     });
 }

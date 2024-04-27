@@ -1,0 +1,30 @@
+<div class="tab-item">
+    <h2 class="tab-item__header">About user</h2>
+    <div class="table-responsive tab-item__content">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">ROLE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.age}">35</td>
+                    <td th:text="${user.email}">admin@mail.ru</td>
+                    <td>
+                        <th:block th:each="role: ${user.getAuthorities()}" th:text="|${role} |">
+                        </th:block>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

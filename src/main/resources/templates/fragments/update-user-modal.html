@@ -1,14 +1,15 @@
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="edit-user-modal">
+<div class="modal fade" id="editModal" role="dialog" aria-hidden="true" th:fragment="edit-user-modal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" th:attr="onclick=|closeModal()|">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body d-flex align-items-center justify-content-center ">
                 <form th:action="@{/update}" th:method="put" th:object="${editableUser}"
+                      id="update-form"
                       class="small-form font-weight-bold text-center">
                     <div class="mb-3">
                         <label for="edit-id">ID</label>
@@ -48,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary" form="update-form">Edit</button>
             </div>
         </div>
     </div>

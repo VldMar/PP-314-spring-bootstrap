@@ -3,6 +3,7 @@ package org.mrchv.springbootstrap.service;
 import org.mrchv.springbootstrap.model.Role;
 import org.mrchv.springbootstrap.model.User;
 import org.mrchv.springbootstrap.repository.UserRepository;
+import org.mrchv.springbootstrap.util.UserUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,12 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepo;
     private final PasswordEncoder encoder;
+    private final RoleService roleService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder encoder, RoleService roleService) {
         this.userRepo = userRepository;
         this.encoder = encoder;
+        this.roleService = roleService;
     }
 
     @Override
@@ -42,8 +45,10 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException("Пользователь с username=%s уже существует!".formatted(user.getUsername()));
         }
 
-        if (user.getRoles() == null) {
+        if (user.getRoles().size() == 0) {
             user.setRoles(Set.of(new Role("ROLE_USER")));
+        } else if (UserUtil.isUserAdmin(user)) {
+            user.setRoles(Set.copyOf(roleService.findAllRoles()));
         }
 
         user.setPassword(encoder.encode(user.getPassword()));
@@ -57,8 +62,10 @@ public class UserServiceImpl implements UserService{
             throw new RuntimeException("Пользователь с username=%s не найден!".formatted(user.getUsername()));
         }
 
-        if (user.getRoles() == null) {
+        if (user.getRoles().size() == 0) {
             user.setRoles(userFromDB.getRoles());
+        } else if (UserUtil.isUserAdmin(user)) {
+            user.setRoles(Set.copyOf(roleService.findAllRoles()));
         }
 
         String password = user.getPassword() == ""
