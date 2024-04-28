@@ -41,11 +41,10 @@ public class MyUserDetailsService implements UserDetailsService {
                 .age(5)
                 .email("admin@mail.ru")
                 .password("admin")
-                .roles(Set.of(roleService.findRoleByName("ROLE_ADMIN"), roleService.findRoleByName("ROLE_USER")))
+                .roles(Set.of(adminRole, userRole))
                 .build();
 
         userService.addUser(admin);
-
 
         User user = User.builder()
                 .name("vladimir")
@@ -53,7 +52,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 .age(6)
                 .email("user@mail.ru")
                 .password("user")
-                .roles(Set.of(roleService.findRoleByName("ROLE_USER")))
+                .roles(Set.of(userRole))
                 .build();
 
         userService.addUser(user);
